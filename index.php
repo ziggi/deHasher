@@ -38,20 +38,18 @@ include "config.php";
 					<td valign=top><b>Encode:</b></td>
 					<td>
 						http://hash.ziggi.org/api.php?type=TYPE&text=TEXT
-						<p><b>type</b> - тип хэша, на данный момент доступно: md5, md5(md5()), sha1, base64</p>
-						<p><b>text</b> - любой текст</p>
-						<p>Результатом выполнения запроса будет вывод хэша текста TEXT методом TYPE в виде html кода</p>
-						<br><br>
+						<p><b>type</b> - type of hash, currently available: md5, md5(md5()), sha1, base64</p>
+						<p><b>text</b> - any text</p>
+						<br>
 					</td>
 				</tr>
 				<tr>
 					<td valign=top><b>Decode:</b></td>
 					<td>
 						http://hash.ziggi.org/api.php?type=TYPE&hash=HASH&uot=0/1
-						<p><b>type</b> - тип хэша, на данный момент доступно: md5, md5(md5()), sha1, base64</p>
-						<p><b>hash</b> - хэш строка</p>
-						<p><b>uot</b> (опционально) - если 1, то будут задействованы внешние базы данных, если 0, то только локальная</p>
-						<p>Результатом выполнения запроса будет вывод строки до её хэширования методом TYPE в виде html кода</p>
+						<p><b>type</b> - type of hash, currently available: md5, md5(md5()), sha1, base64</p>
+						<p><b>hash</b> - hash string</p>
+						<p><b>uot</b> (optional) - Use an external database. 1 - true, 0 - false.</p>
 					</td>
 				</tr>
 			</table>
@@ -77,7 +75,7 @@ include "config.php";
 							<span>base64</span>
 						</div>
 					</td>
-					<td >
+					<td>
 						<div id='method_text'>
 							<span class='clicked'>md5</span>
 							<span>md5(md5())</span>
@@ -87,18 +85,18 @@ include "config.php";
 					</td>
 				</tr>
 				<tr>
-					<td>Найденые результаты (<span id='found_count'>0</span>)</td>
-					<td>Не найденые результаты (<span id='notfound_count'>0</span>)</td>
+					<td>Found (<span id='found_count'>0</span>)</td>
+					<td>Not found (<span id='notfound_count'>0</span>)</td>
 				</tr>
 				<tr>
 					<td><textarea id='output_found' readonly></textarea></td>
 					<td><textarea id='output_notfound' readonly></textarea></td>
 				</tr>
 				<tr>
-					<td colspan='2'><div id='use_other_db'><link><input type="checkbox" checked>Использовать внешние базы данных</link></div></td>
+					<td colspan='2'><div id='use_other_db'><link><input type="checkbox" checked>Use an external database</link></div></td>
 				</tr>
 			</table>
-			<center><input type='button' id='result' value='Результат'></center>
+			<center><input type='button' id='result' value='Result'></center>
 		</div>
 	</div>
 	
