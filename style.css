@@ -1,0 +1,182 @@
+body {
+	background-color: #000;
+	color: #999;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+}
+a {
+	font-size: 12px;
+	color: #aaa;
+	text-decoration: none;
+}
+a:link {
+	color: #999;
+}
+a:hover {
+	text-decoration: underline;
+}
+a:active {
+	text-decoration: underline;
+	outline: none;
+}
+a:focus {
+	outline: none;
+}
+a:visited {
+	color: #999;
+}
+
+input[type='text'],input[type='button'] {
+	border: 1px solid #888;
+	background: #333;
+	border-radius: 3px;
+	width: 400px;
+	color: #999;
+}
+
+input[type='button'] {
+	width: 100%;
+	background: #444;
+	color: #bbb;
+}
+
+input[type='button']:hover {
+	background: #555;
+	cursor: pointer;
+}
+
+textarea {
+	width: 100%;
+	height: 100%;
+	min-height: 150px;
+	border: 1px solid #888;
+	background: #333;
+	color: #999;
+	overflow-x: auto;
+	white-space: nowrap;
+	outline: none;
+	resize: none;
+}
+
+select, option {
+	background: #333;
+	color: #999;
+}
+
+select {
+	border: 1px solid #888;
+}
+
+hr {
+	border: 1px solid #888;
+}
+
+#middle_table {
+	width: 95%;
+	margin: 0 auto;
+	padding: 0 10px 10px 10px;
+	font-size: 14px;
+	background: #333;
+	border-radius: 5px;
+}
+
+#middle_table table {
+	width: 100%;
+	border: 0;
+	padding: 10px;
+}
+
+#middle_table table td {
+	padding-right: 5px;
+}
+
+#method_hash, #method_text  {
+	padding: 5px 0 5px 0;
+	font-size: 12px;
+}
+
+#method_hash span, #method_text span  {
+	display: block;
+	float: left;
+	border: 1px solid #888;
+	margin-left: 5px;
+	padding: 1px 5px 1px 5px;
+	border-radius: 3px;
+	background: #444;
+	color: #bbb;
+}
+
+#method_hash span:hover, #method_text span:hover  {
+	background: #555;
+	cursor: pointer;
+}
+
+#method_hash .clicked, #method_text .clicked  {
+	background: #666;
+}
+
+#use_other_db {
+	font-size: 12px;
+	margin: -5px 0 -10px 0;
+}
+
+#footer #copyright {
+	background: #444;
+	border:solid 1px #888;
+	width:70px;
+	float:right;
+	font-weight:bold;
+	padding:0 6px 0 6px;
+	margin:5px;
+	border-radius: 5px;
+}
+
+#footer #api {
+	background: #444;
+	border:solid 1px #888;
+	float:left;
+	font-weight:bold;
+	padding:0 13px 0 13px;
+	margin:5px;
+	border-radius: 5px;
+}
+
+#footer #api a {
+	cursor: pointer;
+}
+
+#middle_api {
+	background: #444;
+	border:solid 1px #888;
+	border-radius: 5px;
+	padding: 5px;
+	color: #bbb;
+	box-shadow: 0 0 30px #000;
+	font-size: 12px;
+   	position: absolute;
+	left: 25%;
+	width: 50%;
+  	top: 100px;
+	display: none;
+}
+
+#middle_api #close {
+	font-weight: bold;
+	font-size: 14px;
+	float: right;
+	position:relative;
+	display: block;
+	padding: 0 4px 0 4px;
+	padding-top: 2px;
+	cursor: pointer;
+	border: 1px solid #888;
+	border-radius: 3px;
+}
+
+#middle_api #close:hover {
+	color: #fff;
+	background: #666;
+}
+
+#middle_api p {
+	margin-bottom: -6px;
+}
