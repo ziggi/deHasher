@@ -3,27 +3,6 @@ body {
 	color: #999;
 	font-family: Arial, Verdana, Helvetica, sans-serif;
 }
-a {
-	font-size: 12px;
-	color: #aaa;
-	text-decoration: none;
-}
-a:link {
-	color: #999;
-}
-a:hover {
-	text-decoration: underline;
-}
-a:active {
-	text-decoration: underline;
-	outline: none;
-}
-a:focus {
-	outline: none;
-}
-a:visited {
-	color: #999;
-}
 
 input[type='text'],input[type='button'] {
 	border: 1px solid #888;
@@ -57,23 +36,11 @@ textarea {
 	resize: none;
 }
 
-select, option {
-	background: #333;
-	color: #999;
-}
-
-select {
-	border: 1px solid #888;
-}
-
-hr {
-	border: 1px solid #888;
-}
-
 #middle_table {
 	width: 95%;
 	margin: 0 auto;
 	padding: 0 10px 10px 10px;
+	margin-top: 25px;
 	font-size: 14px;
 	background: #333;
 	border-radius: 5px;
@@ -117,66 +84,4 @@ hr {
 #use_other_db {
 	font-size: 12px;
 	margin: -5px 0 -10px 0;
-}
-
-#footer #copyright {
-	background: #444;
-	border:solid 1px #888;
-	width:70px;
-	float:right;
-	font-weight:bold;
-	padding:0 6px 0 6px;
-	margin:5px;
-	border-radius: 5px;
-}
-
-#footer #api {
-	background: #444;
-	border:solid 1px #888;
-	float:left;
-	font-weight:bold;
-	padding:0 13px 0 13px;
-	margin:5px;
-	border-radius: 5px;
-}
-
-#footer #api a {
-	cursor: pointer;
-}
-
-#middle_api {
-	background: #444;
-	border:solid 1px #888;
-	border-radius: 5px;
-	padding: 5px;
-	color: #bbb;
-	box-shadow: 0 0 30px #000;
-	font-size: 12px;
-   	position: absolute;
-	left: 25%;
-	width: 50%;
-  	top: 100px;
-	display: none;
-}
-
-#middle_api #close {
-	font-weight: bold;
-	font-size: 14px;
-	float: right;
-	position:relative;
-	display: block;
-	padding: 0 4px 0 4px;
-	padding-top: 2px;
-	cursor: pointer;
-	border: 1px solid #888;
-	border-radius: 3px;
-}
-
-#middle_api #close:hover {
-	color: #fff;
-	background: #666;
-}
-
-#middle_api p {
-	margin-bottom: -6px;
 }

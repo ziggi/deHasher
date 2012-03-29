@@ -1,13 +1,4 @@
 jQuery(function($) {
-
-	$('#footer #api a').click(function() {
-		$('#middle_api').css('display','block');
-	});
-	$('#middle_api #close').click(function() {
-		$('#middle_api').css('display','none');
-	});
-
-
 	var type_hash = 'md5';
 	var type_text = 'md5';
 	

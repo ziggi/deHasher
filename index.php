@@ -11,16 +11,28 @@ include "config.php";
 	<meta name='keywords' content='hash,md5,sha1,base64,хэш,md5_decode,sha1_decode,base64_encode,base64_decode'>
 	<meta name='author' content='ZiGGi'>
 	<link rel='stylesheet' type='text/css' href='style.css'>
+	<link rel='stylesheet' type='text/css' href='zgshell/style.css'>
 	<link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico'>
 	<script type="text/javascript" src="jscripts/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="jscripts/scripts.js"></script>
+	<script type="text/javascript" src="zgshell/scripts.js"></script>
 </head>
 
 <body>
-
-	<div id='middle'>
-		<div id="middle_api">
-			<span id='close'>X</span>
+	<div id='zgshell'>
+		<div class='menu'>
+			<div style='float:left'></div>
+			<div style='float:right'>
+				<span class='button'>API</span>
+				<span>
+					<a href='http://ziggi.org/category/developments/deHasher/' target='_blank'>v<?=ENGINE_VERSION?></a>
+					&nbsp;
+					<a href='http://ziggi.org/' target='_blank'>ZiGGi</a>
+				</span>
+			</div>
+		</div>
+		<div class="window">
+			<span class='close'>x</span>
 			<table>
 				<tr>
 					<td valign=top><b>Encode:</b></td>
@@ -43,8 +55,9 @@ include "config.php";
 					</td>
 				</tr>
 			</table>
-			<br>
 		</div>
+	</div>
+	<div id='middle'>
 		<div id='middle_table'>
 			<table>
 				<tr>
@@ -86,15 +99,6 @@ include "config.php";
 				</tr>
 			</table>
 			<center><input type='button' id='result' value='Результат'></center>
-		</div>
-		<div id='footer'>
-			<div id='api'>
-				<a>API</a>
-			</div>
-			<div id='copyright'>
-				<div style='float:left'><a href='http://ziggi.org/category/developments/deHasher/' target='_blank'>v<?=ENGINE_VERSION?></a></div>
-				<div style='float:right'><a href='http://ziggi.org/' target='_blank'>ZiGGi</a></div>
-			</div>
 		</div>
 	</div>
 	
