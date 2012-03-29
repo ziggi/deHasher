@@ -26,7 +26,7 @@ if (isset($_GET['text']))
 			$text_hash = md5($text);
 			break;
 		
-		case "md5(md5())":
+		case "md5_md5":
 			$text_hash = md5(md5($text));
 			break;
 		
@@ -46,7 +46,7 @@ if (isset($_GET['text']))
 	$result = mysql_query("SELECT * FROM `deHasher` WHERE `Text`='$text' AND `Type`='$type'");
 	if (mysql_fetch_row($result) == false)
 	{
-		add_item_to_bd($type, $hash, $content);
+		add_item_to_bd($type, $text_hash, $text);
 	}
 	echo $text_hash;
 }
@@ -60,7 +60,7 @@ else if (isset($_GET['hash']))
 			if (!preg_match('/^[a-f0-9]{32}$/i',$hash)) $result_print = '';
 			break;
 		
-		case "md5(md5())":
+		case "md5_md5":
 			if (!preg_match('/^[a-f0-9]{32}$/i',$hash)) $result_print = '';
 			break;
 		
