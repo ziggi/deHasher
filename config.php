@@ -1,6 +1,6 @@
 <?php
 
-define("ENGINE_VERSION","1.0");
+define("ENGINE_VERSION","1.1");
 
 define("MySQL_HOSTNAME","localhost");
 define("MySQL_USER","root");
