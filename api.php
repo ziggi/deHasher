@@ -23,36 +23,30 @@ if (isset($_GET['text']))
 	switch ($type)
 	{
 		case "md5":
-		{
 			$text_hash = md5($text);
 			break;
-		}
+		
 		case "md5(md5())":
-		{
 			$text_hash = md5(md5($text));
 			break;
-		}
+		
 		case "sha1":
-		{
 			$text_hash = sha1($text);
 			break;
-		}
+		
 		case "base64":
-		{
 			echo base64_encode($text);
 			exit;
-		}
+		
 		default:
-		{
 			$text_hash = md5($text);
 			break;
-		}
 	}
 	
 	$result = mysql_query("SELECT * FROM `deHasher` WHERE `Text`='$text' AND `Type`='$type'");
 	if (mysql_fetch_row($result) == false)
 	{
-		mysql_query("INSERT INTO `deHasher` (`Type`,`Hash`,`Text`) VALUES ('$type','$text_hash','$text')");
+		add_item_to_bd($type, $hash, $content);
 	}
 	echo $text_hash;
 }
@@ -63,35 +57,31 @@ else if (isset($_GET['hash']))
 	switch ($type)
 	{
 		case "md5":
-		{
-			if(!preg_match('/^[a-f0-9]{32}$/i',$hash)) $result_print = '';
+			if (!preg_match('/^[a-f0-9]{32}$/i',$hash)) $result_print = '';
 			break;
-		}
+		
 		case "md5(md5())":
-		{
-			if(!preg_match('/^[a-f0-9]{32}$/i',$hash)) $result_print = '';
+			if (!preg_match('/^[a-f0-9]{32}$/i',$hash)) $result_print = '';
 			break;
-		}
+		
 		case "sha1":
-		{
+			if (!preg_match('/^[a-f0-9]{40}$/i',$hash)) $result_print = '';
 			break;
-		}
+		
 		case "base64":
-		{
 			echo urldecode(base64_decode($hash));
 			exit;
-		}
+		
 		default:
-		{
-			if(!preg_match('/^[a-f0-9]{32}$/i',$hash)) $result_print = '';
+			if (!preg_match('/^[a-f0-9]{32}$/i',$hash)) $result_print = '';
 			break;
-		}
 	}
 	
 	$result = mysql_query("SELECT * FROM `deHasher` WHERE `Hash`='$hash' AND `Type`='$type'");
 	$array = mysql_fetch_assoc($result);
 	if (empty($array['ID']))
 	{
+		// check other databases
 		$uot = isset($_GET['uot']) ? $_GET['uot'] : 0;
 		if ($uot == 1)
 		{
@@ -102,15 +92,15 @@ else if (isset($_GET['hash']))
 			}
 			else
 			{
-				//found, but not valid
-				if (md5($content) != strtolower($hash))
-				{
-					$result_print = '';
-				}
-				else
+				// check on valid
+				if (md5($content) == strtolower($hash))
 				{
 					$result_print = $content;
-					mysql_query("INSERT INTO `deHasher` (`Type`,`Hash`,`Text`) VALUES ('$type','$hash','$content')");
+					add_item_to_bd($type, $hash, $content);
+				}
+				else // found, but not valid
+				{
+					$result_print = '';
 				}
 			}
 		}
@@ -131,6 +121,11 @@ else if (isset($_GET['hash']))
 		}
 	}
 	echo $result_print;
+}
+
+function add_item_to_bd($type, $hash, $content)
+{
+	mysql_query("INSERT INTO `deHasher` (`Type`,`Hash`,`Text`) VALUES ('$type','$hash','$content')");
 }
 
 function filter_params($param)
