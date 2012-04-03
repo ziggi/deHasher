@@ -10,12 +10,20 @@ if (!mysql_connect(MySQL_HOSTNAME,MySQL_USER,MySQL_PASSWORD))
 mysql_select_db(MySQL_DB);
 mysql_query("SET NAMES utf8");
 
+
 $type = "md5";
 if (isset($_GET['type']))
 {
 	$type = filter_params($_GET['type']);
 }
-if (isset($_GET['text']))
+if (isset($_GET['count']))
+{
+	echo "count";
+	/*$result = mysql_query("SELECT COUNT(*) FROM `deHasher_$type`");
+	echo $result;
+	echo mysql_result($result,0);*/
+}
+else if (isset($_GET['text']))
 {
 	$text = urldecode(filter_params($_GET['text']));
 	$text_hash = "";
