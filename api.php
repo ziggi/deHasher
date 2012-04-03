@@ -15,10 +15,9 @@ if (isset($_GET['type']))
 {
 	$type = filter_params($_GET['type']);
 }
-
 if (isset($_GET['text']))
 {
-	$text = urlencode(filter_params($_GET['text']));
+	$text = urldecode(filter_params($_GET['text']));
 	$text_hash = "";
 	switch ($type)
 	{
@@ -43,7 +42,7 @@ if (isset($_GET['text']))
 			break;
 	}
 	
-	$result = mysql_query("SELECT * FROM `deHasher` WHERE `Text`='$text' AND `Type`='$type'");
+	$result = mysql_query("SELECT * FROM `deHasher_$type` WHERE `Text`='$text'");
 	if (mysql_fetch_row($result) == false)
 	{
 		add_item_to_bd($type, $text_hash, $text);
@@ -77,7 +76,7 @@ else if (isset($_GET['hash']))
 			break;
 	}
 	
-	$result = mysql_query("SELECT * FROM `deHasher` WHERE `Hash`='$hash' AND `Type`='$type'");
+	$result = mysql_query("SELECT * FROM `deHasher_$type` WHERE `Hash`='$hash'");
 	$array = mysql_fetch_assoc($result);
 	if (empty($array['ID']))
 	{
@@ -125,7 +124,7 @@ else if (isset($_GET['hash']))
 
 function add_item_to_bd($type, $hash, $content)
 {
-	mysql_query("INSERT INTO `deHasher` (`Type`,`Hash`,`Text`) VALUES ('$type','$hash','$content')");
+	mysql_query("INSERT INTO `deHasher_$type` (`Hash`,`Text`) VALUES ('$hash','$content')");
 }
 
 function filter_params($param)
