@@ -18,10 +18,7 @@ if (isset($_GET['type']))
 }
 if (isset($_GET['count']))
 {
-	echo "count";
-	/*$result = mysql_query("SELECT COUNT(*) FROM `deHasher_$type`");
-	echo $result;
-	echo mysql_result($result,0);*/
+	echo get_hash_count($type);
 }
 else if (isset($_GET['text']))
 {
@@ -125,6 +122,16 @@ else if (isset($_GET['hash']))
 		$result_print = urldecode($text);
 	}
 	echo $result_print;
+}
+
+function get_hash_count($type)
+{
+	if ($type == "all")
+	{
+		return get_hash_count("md5")+get_hash_count("md5_md5")+get_hash_count("sha1");
+	}
+	$result = mysql_query("SELECT COUNT(*) FROM `deHasher_$type`");
+	return mysql_result($result,0);
 }
 
 function filter_params($param)
