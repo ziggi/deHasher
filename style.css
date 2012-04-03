@@ -85,3 +85,24 @@ textarea {
 	font-size: 12px;
 	margin: -5px 0 -10px 0;
 }
+
+#db_info {
+	min-width: 150px;
+}
+
+#db_info table {
+	width: 100%;
+	border: 1px solid #888;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+#db_info table td {
+	border: 1px solid #888;
+	padding: 5px;
+}
+#db_info table td:nth-child(2) {
+	text-align: center;
+}
+#db_info table tr:nth-child(1) {
+	text-align: center;
+}

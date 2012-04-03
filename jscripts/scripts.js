@@ -1,4 +1,20 @@
 jQuery(function($) {
+	
+	$('.zgshell_window').center('body');
+	
+	$('.hash_count').each(function() {
+		var type = $(this).attr('id').replace('count_','');
+		$.ajax({
+			url: 'api.php',
+			type: 'GET',
+			data: 'type='+type+'&count',
+			success: function(data) {
+				$('div[id=count_'+type+']').html(data);
+			}
+		});
+	});
+	
+	
 	var type_hash = 'md5';
 	var type_text = 'md5';
 	

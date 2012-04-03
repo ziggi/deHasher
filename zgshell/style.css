@@ -55,7 +55,7 @@
 	color: #bbb;
 }
 
-#zgshell .window {
+#zgshell .zgshell_window {
 	background: #444;
 	border: solid 1px #888;
 	border-radius: 5px;
@@ -67,10 +67,9 @@
 	padding: 5px;
 	color: #bbb;
 	font-size: 12px;
-	width: 50%;
 	display: none;
 }
-#zgshell .window .close {
+#zgshell .zgshell_window .close {
 	float: right;
 	text-align: center;
 	font-family: Arial, Tahoma;
@@ -91,12 +90,12 @@
 		 -o-border-radius: 0 5px 0 5px;
 			border-radius: 0 5px 0 5px;
 }
-#zgshell .window .close:hover {
+#zgshell .zgshell_window .close:hover {
 	color: #ddd;
 	background: #666;
 }
 
-#zgshell .window .close:active {
+#zgshell .zgshell_window .close:active {
 	background: #404040;
 	color: #bbb;
 }
