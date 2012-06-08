@@ -1,0 +1,127 @@
+/* ----------------------------------- 
+              ZiGGi Shell             
+ ------------------------------------- */
+#zishell .menu {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 16px;
+	z-index: 9999;
+	padding: 5px 0;
+	background: #505050;
+    background: -webkit-linear-gradient(bottom, #404040, #505050);
+    background:    -moz-linear-gradient(bottom, #404040, #505050);
+    background: 	-ms-linear-gradient(bottom, #404040, #505050);
+    background: 	 -o-linear-gradient(bottom, #404040, #505050);
+    background: 		linear-gradient(bottom, #404040, #505050);
+	border: 0;
+}
+#zishell .menu .button {
+	cursor: pointer;
+	margin-right: -4px;
+}
+#zishell .menu .button:hover{
+	color: #ddd;
+}
+#zishell .menu .button:active {
+	background: #404040;
+	color: #bbb;
+}
+#zishell .menu span {
+	color: #bbb;
+	font-weight: bold;
+	font-size: 14px;
+	font-family: Arial, Tahoma;
+	text-shadow: 0 -1px 0 #222;
+	text-align: center;
+	padding: 4px;
+	border-left: 1px solid #333;
+}
+#zishell .menu a {
+	font-size: 12px;
+	color: #bbb;
+	text-decoration: none;
+	font-weight: bold;
+}
+#zishell .menu a:hover {
+	text-decoration: underline;
+}
+
+#zishell .window {
+	background: #333;
+	border: solid 1px #4a4a4a;
+	box-shadow: 0 0 20px 2px #121212;
+   	position: absolute;
+	z-index: 10;
+  	margin: 0 auto;
+	padding: 10px;
+	color: #bbb;
+	font-size: 12px;
+	display: none;
+}
+#zishell .window .close {
+	float: right;
+	text-align: center;
+	font-weight: bold;
+	font-size: 14px;
+	cursor: pointer;
+	position: absolute;
+	display: block;
+	width: 18px;
+	height: 18px;
+	right: -12px;
+	top: -12px;
+	border: 2px solid #5d5d5d;
+	background: #333;
+	-webkit-border-radius: 10px;
+	 -khtml-border-radius: 10px;
+	   -moz-border-radius: 10px;
+		-ie-border-radius: 10px;
+		 -o-border-radius: 10px;
+			border-radius: 10px;
+}
+#zishell .window .close:hover {
+	color: #ddd;
+	background: #4d4d4d;
+}
+
+#zishell .window .close:active {
+	background: #333;
+	color: #bbb;
+}
+
+
+/* ----------------------------------- 
+                Button               
+ ------------------------------------- */
+button.zishell, input[type="button"].zishell, input[type="submit"].zishell, a.zishell, span.zishell {
+	padding: 6px 15px;
+	border: 1px solid #4a4a4a;
+	background: #444    linear-gradient(top, #444, #333);
+	background: -webkit-linear-gradient(top, #444, #333);
+	background:    -moz-linear-gradient(top, #444, #333);
+	background: 	-ms-linear-gradient(top, #444, #333);
+	background:      -o-linear-gradient(top, #444, #333);
+	margin: 0;
+	color: #ccc;
+	text-align: center;
+	text-shadow: 0 -1px 0 #555;
+	text-shadow: 0 -1px 0 #222;
+	font-weight: bold;
+  	font-size:13px;
+	cursor: pointer;
+	text-decoration: none;
+}
+button.zishell:hover, input[type="button"].zishell:hover, input[type="submit"].zishell:hover, a.zishell:hover, span.zishell:hover {
+	color: #eee;
+	background: #4d4d4d linear-gradient(top, #4d4d4d, #333);
+	background: -webkit-linear-gradient(top, #4d4d4d, #333);
+	background:    -moz-linear-gradient(top, #4d4d4d, #333);
+	background:     -ms-linear-gradient(top, #4d4d4d, #333);
+	background:      -o-linear-gradient(top, #4d4d4d, #333);
+}
+button.zishell:active, input[type="button"].zishell:active, input[type="submit"].zishell:active, a.zishell:active, span.zishell:active {
+	color: #bbb;
+	background: #333;
+}

@@ -20,13 +20,13 @@ jQuery(function($) {
 	
 	$('div#method_hash span').click(function() {
 		type_hash = $(this).html();
-		$('div#method_hash span').css('background-color','#444');
-		$(this).css('background-color','#666');
+		$('div#method_hash span').removeClass('clicked');
+		$(this).addClass('clicked');
 	});
 	$('div#method_text span').click(function() {
 		type_text = $(this).html();
-		$('div#method_text span').css('background-color','#444');
-		$(this).css('background-color','#666');
+		$('div#method_text span').removeClass('clicked');
+		$(this).addClass('clicked');
 	});
 	$('#result').click(function() {
 		$('#output_found').val('');

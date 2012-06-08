@@ -11,15 +11,15 @@ include "config.php";
 	<meta name="keywords" content="hash,md5,sha1,base64,хэш,md5_decode,sha1_decode,base64_encode,base64_decode">
 	<meta name="author" content="ZiGGi">
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="stylesheet" type="text/css" href="zgshell/style.css">
+	<link rel="stylesheet" type="text/css" href="zishell/style.css">
 	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 	<script type="text/javascript" src="jscripts/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="jscripts/scripts.js"></script>
-	<script type="text/javascript" src="zgshell/scripts.js"></script>
+	<script type="text/javascript" src="zishell/scripts.js"></script>
 </head>
 
 <body>
-	<div id="zgshell">
+	<div id="zishell">
 		<div class="menu">
 			<div style="float:left"></div>
 			<div style="float:right">
@@ -32,7 +32,7 @@ include "config.php";
 				</span>
 			</div>
 		</div>
-		<div class="zgshell_window" id="api_info">
+		<div class="window" id="api_info">
 			<span class="close">x</span>
 			<table>
 				<tr>
@@ -63,7 +63,7 @@ include "config.php";
 				</tr>
 			</table>
 		</div>
-		<div class="zgshell_window" id="db_info">
+		<div class="window" id="db_info">
 			<span class="close">x</span>
 			<table>
 				<tr>
@@ -102,18 +102,18 @@ include "config.php";
 				<tr>
 					<td>
 						<div id="method_hash">
-							<span class="clicked">md5</span>
-							<span>md5_md5</span>
-							<span>sha1</span>
-							<span>base64</span>
+							<span class="clicked zishell">md5</span>
+							<span class="zishell">md5_md5</span>
+							<span class="zishell">sha1</span>
+							<span class="zishell">base64</span>
 						</div>
 					</td>
 					<td>
 						<div id="method_text">
-							<span class="clicked">md5</span>
-							<span>md5_md5</span>
-							<span>sha1</span>
-							<span>base64</span>
+							<span class="clicked zishell">md5</span>
+							<span class="zishell">md5_md5</span>
+							<span class="zishell">sha1</span>
+							<span class="zishell">base64</span>
 						</div>
 					</td>
 				</tr>
@@ -129,7 +129,7 @@ include "config.php";
 					<td colspan="2"><div id="use_other_db"><link><input type="checkbox" checked>Use an external database</link></div></td>
 				</tr>
 			</table>
-			<center><input type="button" id="result" value="Result"></center>
+			<center><input type="button" id="result" class='zishell' value="Result"></center>
 		</div>
 	</div>
 	
