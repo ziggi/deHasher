@@ -26,7 +26,7 @@ include "config.php";
 				<span class="button db_info">DB info</span>
 				<span class="button api_info">API</span>
 				<span>
-					<a href="http://ziggi.org/category/developments/deHasher/" target="_blank">v<?=ENGINE_VERSION?></a>
+					<a href="https://github.com/ZiGGi/deHasher" target="_blank">v<?=ENGINE_VERSION?></a>
 					&nbsp;
 					<a href="http://ziggi.org/" target="_blank">ZiGGi</a>
 				</span>
