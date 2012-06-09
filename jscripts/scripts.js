@@ -14,7 +14,6 @@ jQuery(function($) {
 		});
 	});
 	
-	
 	var type_hash = 'md5';
 	var type_text = 'md5';
 	
