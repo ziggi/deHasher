@@ -7,12 +7,6 @@ jQuery(function($) {
 		$('textarea').css('height', ($(window).outerHeight()) / 2 - 100);
 	});
 	
-	$('textarea').resize(function() {
-		alert('asd');
-		$('#middle_table').css('height', $(window).outerHeight() - 48);
-		$('textarea').css('height', ($(window).outerHeight()) / 2 - 100);
-	});
-	
 	$('.hash_count').each(function() {
 		var type = $(this).attr('id').replace('count_','');
 		$.ajax({
