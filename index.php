@@ -13,7 +13,7 @@ include "config.php";
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" type="text/css" href="zishell/style.css">
 	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
-	<script type="text/javascript" src="jscripts/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="jscripts/jquery-1.9.0.min.js"></script>
 	<script type="text/javascript" src="jscripts/scripts.js"></script>
 	<script type="text/javascript" src="zishell/scripts.js"></script>
 </head>
