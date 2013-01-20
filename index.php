@@ -9,7 +9,7 @@ include "config.php";
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="description" content="Хэширование текста и дехэширование хэша">
 	<meta name="keywords" content="hash,md5,sha1,base64,хэш,md5_decode,sha1_decode,base64_encode,base64_decode">
-	<meta name="author" content="ZiGGi">
+	<meta name="author" content="ziggi">
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" type="text/css" href="zishell/style.css">
 	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
@@ -26,9 +26,9 @@ include "config.php";
 				<span class="button db_info">DB info</span>
 				<span class="button api_info">API</span>
 				<span>
-					<a href="https://github.com/ZiGGi/deHasher" target="_blank">v<?=ENGINE_VERSION?></a>
+					<a href="https://github.com/ziggi/deHasher" target="_blank">v<?=ENGINE_VERSION?></a>
 					&nbsp;
-					<a href="http://ziggi.org/" target="_blank">ZiGGi</a>
+					<a href="http://ziggi.org/" target="_blank">ziggi</a>
 				</span>
 			</div>
 		</div>

@@ -1,6 +1,17 @@
 jQuery(function($) {
+	$('#middle_table').css('height', $(window).outerHeight() - 48);
+	$('textarea').css('height', ($(window).outerHeight()) / 2 - 100);
 	
-	$('.zgshell_window').center('body');
+	$(window).resize(function() {
+		$('#middle_table').css('height', $(window).outerHeight() - 48);
+		$('textarea').css('height', ($(window).outerHeight()) / 2 - 100);
+	});
+	
+	$('textarea').resize(function() {
+		alert('asd');
+		$('#middle_table').css('height', $(window).outerHeight() - 48);
+		$('textarea').css('height', ($(window).outerHeight()) / 2 - 100);
+	});
 	
 	$('.hash_count').each(function() {
 		var type = $(this).attr('id').replace('count_','');
@@ -13,6 +24,7 @@ jQuery(function($) {
 			}
 		});
 	});
+	
 	
 	var type_hash = 'md5';
 	var type_text = 'md5';

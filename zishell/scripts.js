@@ -6,7 +6,11 @@ jQuery(function($) {
 	$('#zishell .window .close').click(function() {
 		$(this).parent('div[id]').css('display','none');
 	});
+	
 	$('#zishell .window').center('body');
+	$(window).resize(function() {
+		$('#zishell .window').center('body');
+	});
 });
 // center plugin
 (function($){
