@@ -1,10 +1,10 @@
 jQuery(function($) {
 	$('#middle_table').css('height', $(window).outerHeight() - 48);
-	$('textarea').css('height', ($(window).outerHeight()) / 2 - 100);
+	$('textarea').css('height', $(window).outerHeight() / 2 - 100);
 	
 	$(window).resize(function() {
 		$('#middle_table').css('height', $(window).outerHeight() - 48);
-		$('textarea').css('height', ($(window).outerHeight()) / 2 - 100);
+		$('textarea').css('height', $(window).outerHeight() / 2 - 100);
 	});
 	
 	$('.hash_count').each(function() {
