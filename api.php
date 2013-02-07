@@ -43,8 +43,8 @@ else if (isset($_GET['text']))
 			exit;
 		
 		default:
-			$text_hash = md5($text);
-			break;
+			echo "Unidentified hash type \"$type\"";
+			exit;
 	}
 	
 	$result = mysql_query("SELECT `Hash` FROM `deHasher_$type` WHERE `Text`='$text'");
@@ -77,8 +77,8 @@ else if (isset($_GET['hash']))
 			exit;
 		
 		default:
-			if (!preg_match('/^[a-f0-9]{32}$/i',$hash)) $result_print = '';
-			break;
+			echo "Unidentified hash type \"$type\"";
+			exit;
 	}
 	
 	$result = mysql_query("SELECT `Text` FROM `deHasher_$type` WHERE `Hash`='$hash'");
