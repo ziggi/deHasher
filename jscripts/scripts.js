@@ -44,7 +44,7 @@ jQuery(function($) {
 		{
 			var input_array = input_hash.split(/\n/gi);
 			var uot = 0;
-			if ( $('#use_other_db input').attr('checked') == 'checked' && type_hash == 'md5') {
+			if ( $('#use_other_db input').is(':checked') && type_hash == 'md5' ) {
 				uot = 1;
 			}
 			$.each(input_array, function(index, value) {
