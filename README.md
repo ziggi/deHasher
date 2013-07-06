@@ -1,11 +1,13 @@
+### About deHasher
+
 Web PHP script for decode hash sums.
 
-Using API:
+
+### Using API
 
     Encode: http://hash.ziggi.org/api.php?type=TYPE&text=TEXT
             type - type of hash, currently available: md5, md5_md5, sha1, base64
             text - any text
-
 
     Decode: http://hash.ziggi.org/api.php?type=TYPE&hash=HASH&uot=0/1
             type - type of hash, currently available: md5, md5_md5, sha1, base64
