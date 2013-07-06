@@ -1,4 +1,4 @@
-jQuery(function($) {
+$(function($) {
 	$('#middle_table').css('height', $(window).outerHeight() - 48);
 	$('textarea').css('height', $(window).outerHeight() / 2 - 100);
 	
@@ -33,7 +33,12 @@ jQuery(function($) {
 		$('div#method_text span').removeClass('clicked');
 		$(this).addClass('clicked');
 	});
+	
+	
 	$('#result').click(function() {
+		$(this).removeClass("zishell");
+		$(this).addClass("active");
+		
 		$('#output_found').val('');
 		$('#output_notfound').val('');
 		$('#found_count').html('0');
@@ -53,9 +58,10 @@ jQuery(function($) {
 				}
 				$.ajax({
 					url: 'api.php',
+					async: 'false',
 					type: 'GET',
 					data: 'hash='+value+'&type='+type_hash+'&uot='+uot,
-					success: function(html){
+					success: function(html) {
 						if (html == '' && html != '\0')	{
 							$('#notfound_count').html( parseInt($('#notfound_count').html()) + 1 );
 							$('#output_notfound').val( $('#output_notfound').val() + value + '\n');
@@ -75,6 +81,7 @@ jQuery(function($) {
 			$.each(input_array, function(index, value) {
 				$.ajax({
 					url: 'api.php',
+					async: 'false',
 					type: 'GET',
 					data: 'text='+value+'&type='+type_text,
 					contentType: 'text/html',
@@ -85,5 +92,8 @@ jQuery(function($) {
 				});
 			});
 		}
+
+		$('#result').addClass("zishell");
+		$('#result').removeClass("active");
 	});
 });

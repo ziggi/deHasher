@@ -1,21 +1,23 @@
 <?php
-include "config.php";
+include "app.php";
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<title>deHasher v<?=ENGINE_VERSION?></title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="description" content="Хэширование текста и дехэширование хэша">
-	<meta name="keywords" content="hash,md5,sha1,base64,хэш,md5_decode,sha1_decode,base64_encode,base64_decode">
-	<meta name="author" content="ziggi">
+	<meta charset="utf-8">
+	<meta name="description" content="<?=Hasher::$config['description']?>">
+	<meta name="keywords" content="<?=Hasher::$config['keywords']?>">
+	
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" type="text/css" href="zishell/style.css">
 	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
-	<script type="text/javascript" src="jscripts/jquery-1.9.0.min.js"></script>
+
+	<script type="text/javascript" src="jscripts/jquery-2.0.3.min.js"></script>
 	<script type="text/javascript" src="jscripts/scripts.js"></script>
 	<script type="text/javascript" src="zishell/scripts.js"></script>
+
+	<title>deHasher v<?=Hasher::$config['version']?></title>
 </head>
 
 <body>
@@ -26,7 +28,7 @@ include "config.php";
 				<span class="button db_info">DB info</span>
 				<span class="button api_info">API</span>
 				<span>
-					<a href="https://github.com/ziggi/deHasher" target="_blank">v<?=ENGINE_VERSION?></a>
+					<a href="https://github.com/ziggi/deHasher" target="_blank">v<?=Hasher::$config['version']?></a>
 					&nbsp;
 					<a href="http://ziggi.org/" target="_blank">ziggi</a>
 				</span>
@@ -36,7 +38,7 @@ include "config.php";
 			<span class="close">x</span>
 			<table>
 				<tr>
-					<td valign=top><b>Encode:</b></td>
+					<td valign="top"><b>Encode:</b></td>
 					<td>
 						http://hash.ziggi.org/api.php?type=TYPE&text=TEXT
 						<p><b>type</b> - type of hash, currently available: md5, md5_md5, sha1, base64</p>
@@ -45,7 +47,7 @@ include "config.php";
 					</td>
 				</tr>
 				<tr>
-					<td valign=top><b>Decode:</b></td>
+					<td valign="top"><b>Decode:</b></td>
 					<td>
 						http://hash.ziggi.org/api.php?type=TYPE&hash=HASH&uot=0/1
 						<p><b>type</b> - type of hash, currently available: md5, md5_md5, sha1, base64</p>
@@ -54,7 +56,7 @@ include "config.php";
 					</td>
 				</tr>
 				<tr>
-					<td valign=top><b>Count:</b></td>
+					<td valign="top"><b>Count:</b></td>
 					<td>
 						http://hash.ziggi.org/api.php?type=TYPE&count
 						<p><b>type</b> - type of hash table, currently available: all, md5, md5_md5, sha1</p>
@@ -129,7 +131,7 @@ include "config.php";
 					<td colspan="2"><div id="use_other_db"><link><input type="checkbox" checked>Use an external database</link></div></td>
 				</tr>
 			</table>
-			<center><input type="button" id="result" class='zishell' value="Result"></center>
+			<center><input type="button" id="result" class="zishell" value="Result"></center>
 		</div>
 	</div>
 	

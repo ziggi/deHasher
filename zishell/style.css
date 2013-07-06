@@ -116,6 +116,20 @@ button.zishell, input[type="button"].zishell, input[type="submit"].zishell, a.zi
 	cursor: pointer;
 	text-decoration: none;
 }
+button.active, input[type="button"].active, input[type="submit"].active, a.active, span.active {
+	padding: 6px 15px;
+	border: 1px solid #4a4a4a;
+	background: #333;
+	margin: 0;
+	color: #bbb;
+	text-align: center;
+	text-shadow: 0 -1px 0 #555;
+	text-shadow: 0 -1px 0 #222;
+	font-weight: bold;
+  	font-size:13px;
+	cursor: pointer;
+	text-decoration: none;
+}
 button.zishell:hover, input[type="button"].zishell:hover, input[type="submit"].zishell:hover, a.zishell:hover, span.zishell:hover {
 	color: #eee;
 	background: #4d4d4d linear-gradient(top, #4d4d4d, #333);

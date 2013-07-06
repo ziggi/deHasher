@@ -1,142 +1,74 @@
 <?php
 
-include "config.php";
+include "app.php";
 
-if (!mysql_connect(MySQL_HOSTNAME,MySQL_USER,MySQL_PASSWORD))
-{
-	echo "MySQL >> Not connected";
-	exit;
-}
-mysql_select_db(MySQL_DB);
-mysql_query("SET NAMES utf8");
+$app = new Hasher;
+$type = isset($_GET['type']) ? $app->filter_param($_GET['type']) : $type;
 
+if (!array_key_exists($type, $app->hashes) && $type != "all") {
+	echo 'Unidentified hash type "' . $type . '"';
+	return;
+}
 
-$type = "md5";
-if (isset($_GET['type']))
-{
-	$type = filter_params($_GET['type']);
+if (isset($_GET['count'])) {
+	echo $app->get_hash_count($type);
+	return;
 }
-if (isset($_GET['count']))
-{
-	echo get_hash_count($type);
-}
-else if (isset($_GET['text']))
-{
-	$text = urldecode(filter_params($_GET['text']));
-	$text_hash = "";
-	switch ($type)
-	{
-		case "md5":
-			$text_hash = md5($text);
-			break;
-		
-		case "md5_md5":
-			$text_hash = md5(md5($text));
-			break;
-		
-		case "sha1":
-			$text_hash = sha1($text);
-			break;
-		
-		case "base64":
-			echo base64_encode($text);
-			exit;
-		
-		default:
-			echo "Unidentified hash type \"$type\"";
-			exit;
+
+if (isset($_GET['text'])) {
+	$text = urldecode($app->filter_param($_GET['text']));
+
+	if (isset($app->hashes[$type]['decoding'])) {
+		$func = $app->hashes[$type]['encode_function'];
+		echo $func($text);
+		return;
 	}
-	
-	$result = mysql_query("SELECT `Hash` FROM `deHasher_$type` WHERE `Text`='$text'");
-	if (mysql_num_rows($result) == 0)
-	{
-		mysql_query("INSERT INTO `deHasher_$type` (`Hash`,`Text`) VALUES ('$text_hash','$text')");
+
+	$func = $app->hashes[$type]['function'];
+	$text_hash = $func($text);
+
+	if (!$app->hash_exists($type, $text)) {
+		$app->add_hash($type, $text_hash, $text);
 	}
+
 	echo $text_hash;
-}
-else if (isset($_GET['hash']))
-{
-	$hash = filter_params($_GET['hash']);
-	$result_print = "";
-	switch ($type)
-	{
-		case "md5":
-			if (!preg_match('/^[a-f0-9]{32}$/i',$hash)) $result_print = '';
-			break;
-		
-		case "md5_md5":
-			if (!preg_match('/^[a-f0-9]{32}$/i',$hash)) $result_print = '';
-			break;
-		
-		case "sha1":
-			if (!preg_match('/^[a-f0-9]{40}$/i',$hash)) $result_print = '';
-			break;
-		
-		case "base64":
-			echo urldecode(base64_decode($hash));
-			exit;
-		
-		default:
-			echo "Unidentified hash type \"$type\"";
-			exit;
+} else if (isset($_GET['hash'])) {
+	$hash = $app->filter_param($_GET['hash']);
+	$result_print = null;
+
+	if (isset($app->hashes[$type]['decoding'])) {
+		$func = $app->hashes[$type]['decode_function'];
+		echo urldecode($func($hash));
+		return;
+	}
+
+	if (!preg_match($app->hashes[$type]['pattern'], $hash)) {
+		return;
 	}
 	
-	$result = mysql_query("SELECT `Text` FROM `deHasher_$type` WHERE `Hash`='$hash'");
-	$text = null;
-	if (mysql_num_rows($result) != 0)
-	{
-		$text = mysql_result($result,0);
-	}
-	if (empty($text))
-	{
+	$text = $app->get_text($type, $hash);
+
+	if ($text !== false) {
 		// check other databases
 		$uot = isset($_GET['uot']) ? $_GET['uot'] : 0;
-		if ($uot == 1)
-		{
+		if ($uot == 1) {
 			$content = @file_get_contents('http://md5.darkbyte.ru/api.php?q='.$hash);
-			if (!$content)
-			{
+			if (!$content) {
 				$result_print = '';
-			}
-			else
-			{
+			} else {
 				// check on valid
-				if (md5($content) == strtolower($hash))
-				{
+				if (md5($content) == strtolower($hash)) {
 					$result_print = $content;
-					mysql_query("INSERT INTO `deHasher_$type` (`Hash`,`Text`) VALUES ('$hash','$content')");
-				}
-				else // found, but not valid
-				{
+					$app->add_hash($type, $hash, $content);
+				} else {
 					$result_print = '';
 				}
 			}
-		}
-		else
-		{
+		} else {
 			$result_print = '';
 		}
-	}
-	else
-	{
+	} else {
 		$result_print = urldecode($text);
 	}
 	echo $result_print;
 }
-
-function get_hash_count($type)
-{
-	if ($type == "all")
-	{
-		return get_hash_count("md5")+get_hash_count("md5_md5")+get_hash_count("sha1");
-	}
-	$result = mysql_query("SELECT COUNT(*) FROM `deHasher_$type`");
-	return mysql_result($result,0);
-}
-
-function filter_params($param)
-{
-	return mysql_real_escape_string($param);
-}
-
-?>
