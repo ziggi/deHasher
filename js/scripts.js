@@ -1,41 +1,44 @@
-$(function($) {
-	$('#middle_table').css('height', $(window).outerHeight() - 48);
-	$('textarea').css('height', $(window).outerHeight() / 2 - 100);
-	
-	$(window).resize(function() {
-		$('#middle_table').css('height', $(window).outerHeight() - 48);
-		$('textarea').css('height', $(window).outerHeight() / 2 - 100);
+$(function() {
+	$('a[data-type="window"]').click(function() {
+		var target = $(this).attr('data-target');
+		$('#' + target).css('display', 'inline-block');
+		$('#' + target).trigger('windowOpen');
+	});
+	$('.window .close').click(function() {
+		$(this).parent('div[id]').css('display', 'none');
 	});
 	
-	$('.hash_count').each(function() {
-		var type = $(this).attr('id').replace('count_','');
-		$.ajax({
-			url: 'api.php',
-			type: 'GET',
-			data: 'type='+type+'&count',
-			success: function(data) {
-				$('div[id=count_'+type+']').html(data);
-			}
+	$('#db_info').on('windowOpen', function() {
+		$('.hash_count').each(function() {
+			var type = $(this).attr('id').replace('count_','');
+			$.ajax({
+				url: 'api.php',
+				type: 'GET',
+				data: 'type='+type+'&count',
+				success: function(data) {
+					$('div[id=count_'+type+']').html(data);
+				}
+			});
 		});
 	});
-	
 	
 	var type_hash = 'md5';
 	var type_text = 'md5';
 	
-	$('div#method_hash span').click(function() {
+	$('div#method_hash button').click(function() {
 		type_hash = $(this).html();
-		$('div#method_hash span').removeClass('clicked');
-		$(this).addClass('clicked');
+		$('div#method_hash button').removeClass('active');
+		$(this).addClass('active');
 	});
-	$('div#method_text span').click(function() {
+	
+	$('div#method_text button').click(function() {
 		type_text = $(this).html();
-		$('div#method_text span').removeClass('clicked');
-		$(this).addClass('clicked');
+		$('div#method_text button').removeClass('active');
+		$(this).addClass('active');
 	});
 	
-	
-	$('#result').click(function() {
+	$('#result button').click(function() {
+		/*
 		$(this).removeClass("zishell");
 		$(this).addClass("active");
 		
@@ -94,6 +97,6 @@ $(function($) {
 		}
 
 		$('#result').addClass("zishell");
-		$('#result').removeClass("active");
+		$('#result').removeClass("active");*/
 	});
 });

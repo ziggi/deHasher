@@ -1,20 +1,20 @@
 CREATE TABLE IF NOT EXISTS `deHasher_md5` (
-  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Hash` varchar(128) NOT NULL DEFAULT '',
-  `Text` varchar(2048) NOT NULL DEFAULT '',
-  PRIMARY KEY (`ID`)
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `hash` varchar(32) NOT NULL DEFAULT '',
+  `text` varchar(2048) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-CREATE TABLE IF NOT EXISTS `deHasher_md5md5` (
-  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Hash` varchar(128) NOT NULL DEFAULT '',
-  `Text` varchar(2048) NOT NULL DEFAULT '',
-  PRIMARY KEY (`ID`)
+CREATE TABLE IF NOT EXISTS `deHasher_md5_md5` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `hash` varchar(32) NOT NULL DEFAULT '',
+  `text` varchar(2048) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS `deHasher_sha1` (
-  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Hash` varchar(128) NOT NULL DEFAULT '',
-  `Text` varchar(2048) NOT NULL DEFAULT '',
-  PRIMARY KEY (`ID`)
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `hash` varchar(40) NOT NULL DEFAULT '',
+  `text` varchar(2048) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;

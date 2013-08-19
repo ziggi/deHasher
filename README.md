@@ -1,6 +1,6 @@
 ### About deHasher
 
-Web PHP script for decode hash sums.
+PHP class and web script for decode hash sums.
 
 
 ### Using API
