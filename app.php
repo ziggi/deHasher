@@ -1,6 +1,6 @@
 <?php
 
-class deHasher {
+class Hasher {
 	private $db;
 	
 	public static $config = array(
