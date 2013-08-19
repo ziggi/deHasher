@@ -2,7 +2,7 @@
 
 include "app.php";
 
-$app = new deHasher;
+$app = new Hasher;
 $type = $app->get('type');
 
 
