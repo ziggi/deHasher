@@ -37,66 +37,123 @@ $(function() {
 		$(this).addClass('active');
 	});
 	
+	var encode_complete = true;
+	var decode_complete = true;
+	var found_count = 0;
+	var notfound_count = 0;
+	var output_found = "";
+	var output_notfound = "";
+	
 	$('#result button').click(function() {
-		/*
-		$(this).removeClass("zishell");
+		if (!isGetComplete()) {
+			return false;
+		}
 		$(this).addClass("active");
+		$('div#method_hash button').attr('disabled', 'disabled');
+		$('div#method_text button').attr('disabled', 'disabled');
 		
+		// reset values
 		$('#output_found').val('');
 		$('#output_notfound').val('');
 		$('#found_count').html('0');
 		$('#notfound_count').html('0');
+		found_count = 0;
+		notfound_count = 0;
+		output_found = "";
+		output_notfound = "";
 		
-		input_hash = $('#input_hash').val();
-		if (input_hash != '')
-		{
-			var input_array = input_hash.split(/\n/gi);
-			var uot = 0;
-			if ( $('#use_other_db input').is(':checked') && type_hash == 'md5' ) {
-				uot = 1;
-			}
-			$.each(input_array, function(index, value) {
-				if (value.length == 0) {
-					return true; // continue;
-				}
-				$.ajax({
-					url: 'api.php',
-					async: 'false',
-					type: 'GET',
-					data: 'hash='+value+'&type='+type_hash+'&uot='+uot,
-					success: function(html) {
-						if (html == '' && html != '\0')	{
-							$('#notfound_count').html( parseInt($('#notfound_count').html()) + 1 );
-							$('#output_notfound').val( $('#output_notfound').val() + value + '\n');
-						} else {
-							$('#found_count').html( parseInt($('#found_count').html()) + 1 );
-							$('#output_found').val( $('#output_found').val() + value + ':' + html + '\n');
-						}
-					}
-				});
-			});
+		// get
+		var input_decode = $('#input_decode').val();
+		if (!isBlank(input_decode)) {
+			decode_complete = false;
+			var input_array = input_decode.split(/\n/gi);
+			getDecode(input_array, 0);
 		}
 		
-		input_text = $('#input_text').val();
-		if (input_text != '')
-		{
-			var input_array = input_text.split(/\n/gi);
-			$.each(input_array, function(index, value) {
-				$.ajax({
-					url: 'api.php',
-					async: 'false',
-					type: 'GET',
-					data: 'text='+value+'&type='+type_text,
-					contentType: 'text/html',
-					success: function(html) {
-						$('#found_count').html( parseInt($('#found_count').html()) + 1 );
-						$('#output_found').val( $('#output_found').val() + html + ':' + value + '\n');
-					}
-				});
-			});
+		var input_encode = $('#input_encode').val();
+		if (!isBlank(input_encode)) {
+			encode_complete = false;
+			var input_array = input_encode.split(/\n/gi);
+			getEncode(input_array, 0);
 		}
-
-		$('#result').addClass("zishell");
-		$('#result').removeClass("active");*/
 	});
+	
+	function isGetComplete() {
+		if (encode_complete && decode_complete) {
+			return true;
+		}
+		return false;
+	}
+	
+	function onGetComplete() {
+		if (isGetComplete()) {
+			$('#result button').removeClass("active");
+			$('div#method_hash button').removeAttr('disabled');
+			$('div#method_text button').removeAttr('disabled');
+		}
+	}
+	
+	function getDecode(input_array, index) {
+		var uot = 0;
+		if ( $('#use_other_db input').is(':checked') && type_hash == 'md5' ) {
+			uot = 1;
+		}
+		$.ajax({
+			url: 'api.php',
+			type: 'GET',
+			data: 'hash=' + input_array[index] + '&type=' + type_hash + '&uot=' + uot,
+			contentType: 'text/html',
+			success: function(html) {
+				if (isBlank(html)) {
+					notfound_count++;
+					$('#notfound_count').html(notfound_count);
+					
+					output_notfound = output_notfound + input_array[index] + '\n';
+					$('#output_notfound').val(output_notfound);
+				} else {
+					found_count++;
+					$('#found_count').html(found_count);
+					
+					output_found = output_found + input_array[index] + ':' + html + '\n';
+					$('#output_found').val(output_found);
+				}
+			}
+		}).done(function() {
+			index++;
+			if (index < input_array.length) {
+				getDecode(input_array, index);
+			} else {
+				decode_complete = true;
+				onGetComplete();
+			}
+		});
+	}
+	
+	function getEncode(input_array, index) {
+		$.ajax({
+			url: 'api.php',
+			type: 'GET',
+			data: 'text=' + input_array[index] + '&type=' + type_text,
+			contentType: 'text/html',
+			success: function(html) {
+				found_count++;
+				$('#found_count').html(found_count);
+				
+				output_found = output_found + html + ':' + input_array[index] + '\n';
+				$('#output_found').val(output_found);
+			}
+		}).done(function() {
+			index++;
+			if (index < input_array.length) {
+				getEncode(input_array, index);
+			} else {
+				encode_complete = true;
+				onGetComplete();
+			}
+		});
+	}
+	
+	function isBlank(str) {
+		return (!str || /^\s*$/.test(str));
+	}
 });

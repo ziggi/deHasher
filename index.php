@@ -89,13 +89,13 @@ include "app.php";
 		<td>
 		  <div class="head">Decode</div>
 		  <div class="text">
-			  <textarea></textarea>
+			  <textarea id="input_decode"></textarea>
 		  </div>
 	    </td>
 		<td>
 		  <div class="head">Encode</div>
 		  <div class="text">
-			  <textarea></textarea>
+			  <textarea id="input_encode"></textarea>
 		  </div>
 		</td>
 	  </tr>
@@ -119,15 +119,15 @@ include "app.php";
 	  </tr>
 	  <tr>
 		<td>
-		  <div class="head">Found (0)</div>
+		  <div class="head">Found (<span id="found_count">0</span>)</div>
 		  <div class="text">
-			  <textarea></textarea>
+			  <textarea id="output_found"></textarea>
 		  </div>
 	    </td>
 		<td>
-		  <div class="head">Not found (0)</div>
+		  <div class="head">Not found (<span id="notfound_count">0</span>)</div>
 		  <div class="text">
-			  <textarea></textarea>
+			  <textarea id="output_notfound"></textarea>
 		  </div>
 		</td>
 	  </tr>
