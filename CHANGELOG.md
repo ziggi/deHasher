@@ -1,3 +1,9 @@
+## 2.0 (Aug 22, 2013)
+- Full rewrite front-end code.
+- Back-end code optimization.
+- Database optimization.
+- Design updates
+
 ## 1.5 (Jul 06, 2013)
 - Large internal changes
 - Add Hasher class in app.php
