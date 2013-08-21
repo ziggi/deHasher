@@ -120,7 +120,8 @@ class Hasher {
 				}
 				
 				// check on valid
-				if ($type($content) === strtolower($hash)) {
+				$func = $this->hashes[$type]['encode_function'];
+				if ($func($content) === strtolower($hash)) {
 					$this->add_hash_to_all($content);
 					return $content;
 				}
