@@ -76,6 +76,8 @@ $(function() {
 			var input_array = input_encode.split(/\n/gi);
 			getEncode(input_array, 0);
 		}
+		
+		onGetComplete();
 	});
 	
 	function isGetComplete() {
