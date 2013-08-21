@@ -36,7 +36,9 @@ class Hasher {
 	);
 	
 	public $other_db = array(
-		'http://md5.darkbyte.ru/api.php?q=',
+		'md5' => array(
+			'http://md5.darkbyte.ru/api.php?q=',
+		),
 	);
 
 	function __construct()
@@ -110,15 +112,15 @@ class Hasher {
 		}
 		
 		// use other db's
-		if ($uot === 1) {
-			foreach ($this->other_db as $uri) {
+		if ($uot == 1 && isset($this->other_db[$type])) {
+			foreach ($this->other_db[$type] as $uri) {
 				$content = file_get_contents($uri . $hash);
 				if (!$content) {
 					continue;
 				}
 				
 				// check on valid
-				if (md5($content) === strtolower($hash)) {
+				if ($type($content) === strtolower($hash)) {
 					$this->add_hash_to_all($content);
 					return $content;
 				}
@@ -169,7 +171,7 @@ class Hasher {
 	
 	public function get($field) {
 		if (isset($_GET[$field])) {
-			if (empty($_GET[$field])) {
+			if (empty($_GET[$field]) && $_GET[$field] != 0) {
 				return 1;
 			} else {
 				return urldecode( $this->filter_param($_GET[$field]) );

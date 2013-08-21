@@ -94,10 +94,7 @@ $(function() {
 	}
 	
 	function getDecode(input_array, index) {
-		var uot = 0;
-		if ( $('#use_other_db input').is(':checked') && type_hash == 'md5' ) {
-			uot = 1;
-		}
+		var uot = $('#use_other_db input:checked').length;
 		$.ajax({
 			url: 'api.php',
 			type: 'GET',
