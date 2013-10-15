@@ -173,6 +173,7 @@ label {
 	font-size: 13px;
 	text-shadow: 1px 1px 0px #111;
 	color: #888;
+	outline: none;
 	border: 1px solid #3a3a3a;
 	background: #3a3a3a linear-gradient(top, #3a3a3a, #2a2a2a);
 	background: -webkit-linear-gradient(top, #3a3a3a, #2a2a2a);
