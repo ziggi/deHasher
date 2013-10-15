@@ -2,6 +2,9 @@
 
 PHP class and web script for decode hash sums.
 
+### Demo
+
+See demo here: http://hash.ziggi.org/
 
 ### Using API
 
