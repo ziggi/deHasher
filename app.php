@@ -92,6 +92,10 @@ class Hasher {
 	
 	public function get_text($type, $hash, $uot = 0)
 	{
+		if (!$this->is_type_exists($type)) {
+			return false;
+		}
+
 		// if type is base64 and etc.
 		if ($this->is_type_decoding($type)) {
 			$func = $this->hashes[$type]['decode_function'];
