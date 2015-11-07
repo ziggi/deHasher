@@ -18,7 +18,7 @@ type      | yes      | type of hash
 ##### Result
 If **type** is set then plain text. If not then json array with all hashes.
 
-## Get dehased text
+## Get dehashed text
 ##### Example
 ```
 http://hash.ziggi.org/api/dehash.get?hash=HASH&type=TYPE&include_external_db
