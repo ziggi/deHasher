@@ -1,3 +1,10 @@
+## 3.0.0 (Nov 06, 2015)
+- Fully rewrite code (cleaner and without jQuery).
+- New API (old API is not supported).
+- More algorithms supported.
+- New design (based on but without using Boostrap 3).
+- Auto installer.
+
 ## 2.0 (Aug 22, 2013)
 - Full rewrite front-end code.
 - Back-end code optimization.

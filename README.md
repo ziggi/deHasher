@@ -1,22 +1,57 @@
-### About deHasher
+# About deHasher
+PHP class and web interface for dehashing hash sums.
 
-PHP class and web script for decode hash sums.
-
-### Demo
-
+# Demo
 See demo here: http://hash.ziggi.org/
 
-### Using API
+# Using external API
+## Get hash
+##### Example
+```
+http://hash.ziggi.org/api/hash.get?text=TEXT&type=TYPE
+```
+##### Parameters
+Parameter | Optional | Description
+--------- | -------  | ------------
+text      | no       | for hashing
+type      | yes      | type of hash
+##### Result
+If **type** is set then plain text. If not then json array with all hashes.
 
-    Encode: http://hash.ziggi.org/api.php?type=TYPE&text=TEXT
-            type - type of hash, currently available: md5, md5_md5, sha1, base64
-            text - any text
+## Get dehased text
+##### Example
+```
+http://hash.ziggi.org/api/dehash.get?hash=HASH&type=TYPE&include_external_db
+```
+##### Parameters
+Parameter           | Optional | Description
+------------------- | -------  | ------------
+hash                | no       | hash for dehashing
+type                | yes      | type of hash
+include_external_db | yes      | use external databases
+##### Result
+If result has been found then plain text. If not then nothin.
 
-    Decode: http://hash.ziggi.org/api.php?type=TYPE&hash=HASH&uot=0/1
-            type - type of hash, currently available: md5, md5_md5, sha1, base64
-            hash - hash string
-            uot (optional) - Use an external database. 1 - true, 0 - false.
+## Get count
+##### Example
+```
+http://hash.ziggi.org/api/info.get?count&type=TYPE
+```
+##### Parameters
+Parameter | Optional | Description
+--------- | -------  | ------------
+type      | yes      | type of hash
+##### Result
+If **type** is set then count of hashes with this type. If not then count of all hashes.
 
-    Count:  http://hash.ziggi.org/api.php?type=TYPE&count
-            type - type of hash table, currently available: all, md5, md5_md5, sha1
-            Returns the number of elements
+## Get supported algorythms
+##### Example
+```
+http://hash.ziggi.org/api/info.get?algo&type=TYPE
+```
+##### Parameters
+Parameter | Optional | Description
+--------- | -------  | ------------
+type      | yes      | type of hash
+##### Result
+If **type** is set then 1 or 0 depending on the availability of the algorithm. If not then JSON list of all available algorythms.

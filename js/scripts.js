@@ -1,158 +1,129 @@
-$(function() {
-	$('a[data-type="window"]').click(function() {
-		var target = $(this).attr('data-target');
-		$('#' + target).css('display', 'inline-block');
-		$('#' + target).trigger('windowOpen');
-	});
-	$('.window .close').click(function() {
-		$(this).parent('div[id]').css('display', 'none');
-	});
-	
-	$('#db_info').on('windowOpen', function() {
-		$('.hash_count').each(function() {
-			var type = $(this).attr('id').replace('count_','');
-			$.ajax({
-				url: 'api.php',
-				type: 'GET',
-				data: 'type='+type+'&count',
-				success: function(data) {
-					$('div[id=count_'+type+']').html(data);
-				}
-			});
-		});
-	});
-	
-	var type_hash = 'md5';
-	var type_text = 'md5';
-	
-	$('div#method_hash button').click(function() {
-		type_hash = $(this).html();
-		$('div#method_hash button').removeClass('active');
-		$(this).addClass('active');
-	});
-	
-	$('div#method_text button').click(function() {
-		type_text = $(this).html();
-		$('div#method_text button').removeClass('active');
-		$(this).addClass('active');
-	});
-	
-	var encode_complete = true;
-	var decode_complete = true;
-	var found_count = 0;
-	var notfound_count = 0;
-	var output_found = "";
-	var output_notfound = "";
-	
-	$('#result button').click(function() {
-		if (!isGetComplete()) {
-			return false;
-		}
-		$(this).addClass("active");
-		$('div#method_hash button').attr('disabled', 'disabled');
-		$('div#method_text button').attr('disabled', 'disabled');
-		
-		// reset values
-		$('#output_found').val('');
-		$('#output_notfound').val('');
-		$('#found_count').html('0');
-		$('#notfound_count').html('0');
-		found_count = 0;
-		notfound_count = 0;
-		output_found = "";
-		output_notfound = "";
-		
-		// get
-		var input_decode = $('#input_decode').val();
-		if (!isBlank(input_decode)) {
-			decode_complete = false;
-			var input_array = input_decode.split(/\n/gi);
-			getDecode(input_array, 0);
-		}
-		
-		var input_encode = $('#input_encode').val();
-		if (!isBlank(input_encode)) {
-			encode_complete = false;
-			var input_array = input_encode.split(/\n/gi);
-			getEncode(input_array, 0);
-		}
-		
-		onGetComplete();
-	});
-	
-	function isGetComplete() {
-		if (encode_complete && decode_complete) {
-			return true;
-		}
-		return false;
+window.addEventListener('load', function() {
+	const DEFAULT_ALGO = 'md5';
+
+	// elements
+	var elemSelect = document.querySelector('.control select');
+	var elemInput = document.querySelector('[name=input]');
+	var elemOutput = document.querySelector('[name=output]');
+	var elemToHash = document.querySelector('[name=tohash]');
+	var elemToText = document.querySelector('[name=totext]');
+	var elemExtDb = document.querySelector('.ext-db input');
+	var elemCounter = document.querySelector('[name=counter]');
+
+	// counter
+	counterUpdate();
+
+	function counterUpdate() {
+		var request = new XMLHttpRequest();
+		request.open('GET', 'api/info.get?count&type=md5');
+
+		request.onload = function(event) {
+			elemCounter.innerText = event.target.responseText;
+		};
+
+		request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		request.send();
 	}
-	
-	function onGetComplete() {
-		if (isGetComplete()) {
-			$('#result button').removeClass("active");
-			$('div#method_hash button').removeAttr('disabled');
-			$('div#method_text button').removeAttr('disabled');
+
+	// get option for select element
+	var request = new XMLHttpRequest();
+	request.open('GET', 'api/info.get?algo');
+
+	request.onload = function(event) {
+		var algos = JSON.parse(event.target.responseText);
+
+		for (var i in algos) {
+			var option = document.createElement("option");
+			option.innerHTML = algos[i];
+
+			elemSelect.appendChild(option);
+
+			if (algos[i] == DEFAULT_ALGO) {
+				elemSelect.selectedIndex = i;
+			}
 		}
-	}
-	
-	function getDecode(input_array, index) {
-		var uot = $('#use_other_db input:checked').length;
-		$.ajax({
-			url: 'api.php',
-			type: 'GET',
-			data: 'hash=' + input_array[index] + '&type=' + type_hash + '&uot=' + uot,
-			contentType: 'text/html',
-			success: function(html) {
-				if (isBlank(html)) {
-					notfound_count++;
-					$('#notfound_count').html(notfound_count);
-					
-					output_notfound = output_notfound + input_array[index] + '\n';
-					$('#output_notfound').val(output_notfound);
+	};
+
+	request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	request.send();
+
+	// form handler
+	document.querySelector('form').addEventListener('submit', function(event) {
+		event.preventDefault();
+	});
+
+	elemToHash.addEventListener('click', function() {
+		makeRequest('hash');
+	});
+
+	elemToText.addEventListener('click', function() {
+		makeRequest('dehash');
+	});
+
+	function makeRequest(requestName) {
+		var inputName = (requestName == 'hash') ? 'text' : 'hash';
+
+		// get params
+		var input = elemInput.innerText;
+		var type = elemSelect.options[elemSelect.selectedIndex].value;
+		var extdb = elemExtDb.checked ? '&include_external_db' : '';
+
+		// set to default
+		disableControls(true);
+		elemOutput.value = '';
+		elemInput.innerText = '';
+
+		var completed = 0;
+
+		// make array from input
+		var inputList = input.split(/\n/gi);
+		var inputCount = inputList.length;
+
+		// get hashs
+		for (var i in inputList) {
+			if (inputList[i].length == 0) {
+				inputCount--;
+				continue;
+			}
+
+			var request = new XMLHttpRequest();
+			request.open('GET', 'api/' + requestName + '.get?' + inputName + '=' + inputList[i] + '&type=' + type + extdb);
+
+			request.inputString = inputList[i];
+
+			request.onload = function(event) {
+				var output = event.target.responseText;
+
+				if (output.length > 0) {
+					if (requestName == 'hash') {
+						elemOutput.value += this.inputString + ':' + output + '\n';
+					} else {
+						elemOutput.value += output + ':' + this.inputString + '\n';
+					}
+
+					elemInput.innerHTML += '<div>' + this.inputString + '</div>\n';
 				} else {
-					found_count++;
-					$('#found_count').html(found_count);
-					
-					output_found = output_found + input_array[index] + ':' + html + '\n';
-					$('#output_found').val(output_found);
+					elemInput.innerHTML += '<div class="notfound">' + this.inputString + '</div>\n';
 				}
-			}
-		}).done(function() {
-			index++;
-			if (index < input_array.length) {
-				getDecode(input_array, index);
-			} else {
-				decode_complete = true;
-				onGetComplete();
-			}
-		});
+
+				if (++completed == inputCount) {
+					disableControls(false);
+					counterUpdate();
+				}
+			};
+
+			request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			request.send();
+		}
 	}
-	
-	function getEncode(input_array, index) {
-		$.ajax({
-			url: 'api.php',
-			type: 'GET',
-			data: 'text=' + input_array[index] + '&type=' + type_text,
-			contentType: 'text/html',
-			success: function(html) {
-				found_count++;
-				$('#found_count').html(found_count);
-				
-				output_found = output_found + html + ':' + input_array[index] + '\n';
-				$('#output_found').val(output_found);
-			}
-		}).done(function() {
-			index++;
-			if (index < input_array.length) {
-				getEncode(input_array, index);
-			} else {
-				encode_complete = true;
-				onGetComplete();
-			}
-		});
-	}
-	
-	function isBlank(str) {
-		return (!str || /^\s*$/.test(str));
+
+	function disableControls(isDisabled) {
+		elemInput.disabled = isDisabled;
+		elemInput.contentEditable = !isDisabled;
+		elemOutput.disabled = isDisabled;
+		elemToHash.disabled = isDisabled;
+		elemToText.disabled = isDisabled;
+		elemExtDb.disabled = isDisabled;
+		elemSelect.disabled = isDisabled;
 	}
 });

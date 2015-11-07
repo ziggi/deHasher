@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="MySql" id="Project_2aa828c5" html="y" template="Default" database="MySql" >
+	<schema name="deHasher" catalogname="deHasher" >
+		<table name="hash" >
+			<column name="hash_id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="type_id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" />
+			<column name="text_id" type="int" length="250" jt="4" mandatory="y" unsigned="y" />
+			<column name="hash_value" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_hash" unique="PRIMARY_KEY" >
+				<column name="hash_id" />
+			</index>
+			<index name="idx_hash" unique="NORMAL" >
+				<column name="type_id" />
+			</index>
+			<index name="idx_hash_0" unique="NORMAL" >
+				<column name="text_id" />
+			</index>
+			<fk name="fk_hash" to_schema="deHasher" to_table="type" >
+				<fk_column name="type_id" pk="type_id" />
+			</fk>
+			<fk name="fk_hash_0" to_schema="deHasher" to_table="text" >
+				<fk_column name="text_id" pk="text_id" />
+			</fk>
+		</table>
+		<table name="text" >
+			<column name="text_id" type="int" length="250" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="text_value" type="text" jt="-1" mandatory="y" />
+			<index name="pk_text" unique="PRIMARY_KEY" >
+				<column name="text_id" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
+		<table name="type" >
+			<column name="type_id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="type_name" type="varchar" length="16" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_type" unique="PRIMARY_KEY" >
+				<column name="type_id" />
+			</index>
+		</table>
+	</schema>
+	<connector name="MySql" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.36-bin.jar" host="localhost" port="3306" instance="deHasher" user="root" passwd="cm9vdA==" />
+	<layout id="Layout_329c5c4d" name="deHasher" show_relation_columns="y" >
+		<entity schema="deHasher" name="text" color="b7c8e3" x="45" y="60" />
+		<entity schema="deHasher" name="type" color="bfd4f5" x="405" y="60" />
+		<entity schema="deHasher" name="hash" color="bfd4f5" x="225" y="45" />
+	</layout>
+</project>
