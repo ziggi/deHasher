@@ -18,7 +18,7 @@ window.addEventListener('load', function() {
 		request.open('GET', 'api/info.get?count&type=md5');
 
 		request.onload = function(event) {
-			elemCounter.innerText = event.target.responseText;
+			elemCounter.textContent = event.target.responseText;
 		};
 
 		request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -64,19 +64,22 @@ window.addEventListener('load', function() {
 		var inputName = (requestName == 'hash') ? 'text' : 'hash';
 
 		// get params
-		var input = elemInput.innerText;
+		window.getSelection().selectAllChildren(elemInput);
+		var input = window.getSelection().toString();
+		window.getSelection().removeAllRanges();
+
 		var type = elemSelect.options[elemSelect.selectedIndex].value;
 		var extdb = elemExtDb.checked ? '&include_external_db' : '';
 
 		// set to default
 		disableControls(true);
 		elemOutput.value = '';
-		elemInput.innerText = '';
+		elemInput.textContent = '';
 
 		var completed = 0;
 
 		// make array from input
-		var inputList = input.split(/\n/gi);
+		var inputList = input.split(/\r?\n/gi);
 		var inputCount = inputList.length;
 
 		// get hashs

@@ -103,7 +103,6 @@ select.btn option {
 	display: block;
 	resize: vertical;
 	overflow-y: auto;
-	white-space: nowrap;
 	width: 100%;
 	height: 305px;
 	padding: 6px 12px;
