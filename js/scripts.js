@@ -71,6 +71,11 @@ window.addEventListener('load', function() {
 		var type = elemSelect.options[elemSelect.selectedIndex].value;
 		var extdb = elemExtDb.checked ? '&include_external_db' : '';
 
+		// check params
+		if (input.length == 0) {
+			return;
+		}
+
 		// set to default
 		disableControls(true);
 		elemOutput.value = '';
