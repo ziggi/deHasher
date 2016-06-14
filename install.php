@@ -91,7 +91,7 @@ foreach ($types as $type) {
 
 // exit
 if (!unlink('install.php')) {
-	exit("Remove 'index.php' file immediately!");
+	exit("Remove 'install.php' file immediately!");
 } else {
-	exit("'index.php' file hash been removed.");
+	exit("'install.php' file hash been removed.");
 }
