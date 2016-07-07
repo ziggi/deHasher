@@ -78,7 +78,7 @@ window.addEventListener('load', function() {
 
 		// set to default
 		disableControls(true);
-		elemOutput.value = '';
+		elemOutput.textContent = '';
 		elemInput.textContent = '';
 
 		var completed = 0;
@@ -104,9 +104,11 @@ window.addEventListener('load', function() {
 
 				if (output.length > 0) {
 					if (requestName == 'hash') {
-						elemOutput.value += this.inputString + ':' + output + '\n';
+						// elemOutput.value += this.inputString + ':' + output + '\n';
+						elemOutput.innerHTML += '<div>' + this.inputString + ':' + output + '</div>\n';
 					} else {
-						elemOutput.value += output + ':' + this.inputString + '\n';
+						// elemOutput.value += output + ':' + this.inputString + '\n';
+						elemOutput.innerHTML += '<div>' + output + ':' + this.inputString + '</div>\n';
 					}
 
 					elemInput.innerHTML += '<div>' + this.inputString + '</div>\n';

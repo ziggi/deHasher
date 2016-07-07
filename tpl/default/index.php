@@ -57,7 +57,7 @@
           </div>
           <div class="column-5">
             <div class="form-group">
-              <textarea class="form-control" name="output" placeholder="Result" contenteditable="true" readonly></textarea>
+              <div class="form-control" name="output" data-placeholder="Result"></div>
             </div>
           </div>
         </form>

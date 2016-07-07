@@ -102,6 +102,7 @@ select.btn option {
 .form-control {
 	display: block;
 	resize: vertical;
+	word-wrap: normal;
 	overflow-y: auto;
 	width: 100%;
 	height: 305px;
